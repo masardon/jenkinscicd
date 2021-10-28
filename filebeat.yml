@@ -1,0 +1,38 @@
+filebeat.modules:
+- module: elasticsearch
+  server:
+    enabled: true
+  gc:
+    enabled: true
+  audit:
+    enabled: true
+  slowlog:
+    enabled: true
+  deprecation:
+    enabled: true
+
+- module: kibana
+  log:
+    enabled: true
+  audit:
+    enabled: true
+
+filebeat.autodiscover:
+  providers:
+    - type: docker
+      hints.enabled: true
+
+processors:
+- add_cloud_metadata: ~
+
+filebeat.inputs:
+- type: log
+  enabled: true
+  paths:
+    - /var/jenkins_home/jobs/*/builds/*/log
+
+output.elasticsearch:
+  hosts: ["elasticsearch:9200"]
+
+setup.kibana:
+  host: "kibana:5601"

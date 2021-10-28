@@ -1,0 +1,52 @@
+version: '3.9'
+
+services:
+  jenkins:
+    image: masardon/jenkins-beat:latest
+    deploy:
+      restart_policy:
+        condition: on-failure
+    secrets:
+      - jenkins-user
+      - jenkins-pass
+    networks:
+      - jenkinscicd
+    ports:
+      - 8001:8080
+      - 50000:50000
+    volumes:
+      - ./jenkinshome:/var/jenkins_home
+      - /var/run/docker.sock:/var/run/docker.sock
+
+  elasticsearch:
+    image: elasticsearch:7.14.2
+    ports:
+      - 9200:9200
+      - 9300:9300
+    environment:
+      - discovery.type=single-node
+    networks:
+      - jenkinscicd
+
+  kibana:
+    image: kibana:7.14.2
+    ports:
+      - 5601:5601
+    networks:
+      - jenkinscicd
+    environment:
+      ELASTICSEARCH_HOSTS: '["http://elasticsearch:9200"]'
+    depends_on:
+      - elasticsearch
+
+secrets:
+  jenkins-user:
+    external: true
+  jenkins-pass:
+    external: true
+
+volumes:
+  jenkinshome:
+
+networks:
+  jenkinscicd:

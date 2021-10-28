@@ -1,0 +1,5 @@
+git
+matrix-auth
+saferestart
+logstash
+kubernetes
