@@ -8,7 +8,7 @@ Here is the example that run on my Arm Based (Amphere CPU) Cloud Infrastructure 
 
 >_Jenkins Server_
 >>Host : http://140.238.204.245:8001
->>User : teaserclown_
+>>User : teaserclown
 >>Pass : teaserclown
 
 >_Elasticsearch Host_
