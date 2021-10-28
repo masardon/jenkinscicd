@@ -7,9 +7,9 @@ and installing Filebeat to stream logs to Elastic Search so can be displayed in 
 Here is the example that run on my Arm Based (Amphere CPU) Cloud Infrastructure :
 
 >_Jenkins Server_
->>Host : http://140.238.204.245:8001
->>User : teaserclown
->>Pass : teaserclown
+>> - Host : http://140.238.204.245:8001
+>> - User : teaserclown
+>> - Pass : teaserclown
 
 >_Elasticsearch Host_
 >>Host : http://140.238.204.245:9200
